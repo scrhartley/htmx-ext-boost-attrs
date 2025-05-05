@@ -1,0 +1,61 @@
+{
+  "name": "htmx-ext-boost-attrs",
+  "version": "0.0.0",
+  "main": "dist/boost-attrs.min.js",
+  "exports": "./dist/boost-attrs.esm.js",
+  "type": "module",
+  "bugs": "https://github.com/scrhartley/htmx-ext-boost-attrs/issues",
+  "license": "0BSD",
+  "dependencies": {
+    "htmx.org": "^2.0.3"
+  },
+  "devDependencies": {
+    "chai": "^4.5.0",
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-mocha": "^10.5.0",
+    "mocha": "^11.1.0",
+    "mocha-chrome": "Telroshan/mocha-chrome",
+    "sinon": "^10.0.1",
+    "uglify-js": "^3.19.3"
+  },
+  "scripts": {
+    "dist": "node --no-warnings scripts/dist.mjs",
+    "lint": "eslint *.js test/*.js",
+    "format": "eslint --fix *.js test/*.js",
+    "test": "npm run lint && mocha-chrome test/index.html"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist/*"
+  ],
+  "eslintConfig": {
+    "extends": ["standard", "plugin:mocha/recommended"],
+    "rules": {
+      "mocha/consistent-spacing-between-blocks": 0,
+      "mocha/no-setup-in-describe": 0,
+      "mocha/no-skipped-tests": 0,
+      "camelcase": 0,
+      "no-var": 0,
+      "no-undef": 0,
+      "eqeqeq": 0,
+      "no-multi-str": 0,
+      "no-prototype-builtins": 0,
+      "no-cond-assign": 0,
+      "no-empty": 0,
+      "no-eval": 0,
+      "no-new-func": 0,
+      "no-redeclare": 0,
+      "no-return-assign": 0,
+      "no-unused-vars": 0,
+      "no-useless-call": 0,
+      "no-useless-escape": 0,
+      "no-unused-expressions": 0,
+      "space-before-function-paren": [
+        "error",
+        "never"
+      ]
+    }
+  }
+}
