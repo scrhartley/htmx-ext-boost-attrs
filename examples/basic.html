@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="htmx-config" content='{"historyEnabled":false}'>
+    <script src="https://unpkg.com/sinon@10.0.1/pkg/sinon.js"></script>
+    <script>
+        var server = sinon.createFakeServer({
+          fakeHTTPMethods: true,
+          autoRespond: true
+        })
+        server.respondWith('GET', '/test', 'Bar')
+    </script>
+    <script src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.js"></script>
+    <script src="../boost-attrs.js"></script>
+</head>
+<body hx-boost="true" hx-ext="boost-attrs" hx-boost-target="closest a">
+    <a href="/test">Foo</a>
+</body>
+</html>
