@@ -1,5 +1,9 @@
+import type { Htmx, ExtensionApi } from './types.d.ts'
+
+declare const htmx: Htmx
+
 (function() {
-  let api
+  let api: ExtensionApi
   htmx.defineExtension('boost-attrs', {
     init: function(apiRef) {
       api = apiRef
@@ -31,10 +35,10 @@
     }
   })
 
-  function resolveTarget(elt, targetOverride) {
+  function resolveTarget(elt: Element, targetOverride: string) {
     return targetOverride === 'this' ? api.findThisElement(elt, 'hx-boost-target') : api.querySelectorExt(elt, targetOverride)
   }
-  function triggerTargetError(elt, targetOverride) {
+  function triggerTargetError(elt: Element, targetOverride: string): undefined {
     api.triggerErrorEvent(elt, 'htmx:boostTargetError', { target: targetOverride })
   }
 })()

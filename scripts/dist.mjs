@@ -1,4 +1,5 @@
 import packageConfig from '../package.json' with { type: 'json' }
+import { stripTypes } from './ts-to-js.mjs'
 import path from 'node:path'
 import { promisify } from 'node:util'
 import { access, cp, mkdir, opendir, unlink, readFile, writeFile } from 'node:fs/promises'
@@ -6,10 +7,10 @@ import UglifyJS from 'uglify-js'
 import zlib from 'node:zlib'
 import { createHash } from 'node:crypto'
 
-
-const SRC_NAME = 'boost-attrs.js'
+const SRC_NAME = 'src/boost-attrs.ts'
 const DIST_DIR = 'dist'
-const NAME_PREFIX = path.parse(SRC_NAME).name // without extension
+const NAME_PREFIX = path.parse(SRC_NAME).name // without extension or path
+const SCRIPT_NAME = `${NAME_PREFIX}.js`
 const MINIFIED_NAME = `${NAME_PREFIX}.min.js`
 const GZIPPED_NAME = `${NAME_PREFIX}.min.js.gz`
 const ESM_NAME = `${NAME_PREFIX}.esm.js`
@@ -27,10 +28,11 @@ for await (const dirent of dir) {
 }
 
 
-const source = (await readFile(SRC_NAME, { encoding: 'utf8' })).replace(/\r\n?/g, '\n')
+const ts = await readFile(SRC_NAME, { encoding: 'utf8' })
+const source = stripTypes(ts).trimStart().replace(/\r\n?/g, '\n')
 
 // Regular IIFE script
-await writeFile(path.join(DIST_DIR, SRC_NAME), source)
+await writeFile(path.join(DIST_DIR, SCRIPT_NAME), source)
 
 // Generate minified script
 const minified = UglifyJS.minify(source).code

@@ -17,13 +17,24 @@
     "mocha": "^11.1.0",
     "mocha-chrome": "Telroshan/mocha-chrome",
     "sinon": "^10.0.1",
+    "ts-blank-space": "^0.6.1",
+    "typescript": "~5.5.4",
+    "typescript-eslint": "^7.18.0",
     "uglify-js": "^3.19.3"
   },
   "scripts": {
     "dist": "node --no-warnings scripts/dist.mjs",
-    "lint": "eslint *.js test/*.js",
-    "format": "eslint --fix *.js test/*.js",
-    "test": "npm run lint && mocha-chrome test/index.html"
+    "lint": "eslint src/*.ts test/*.js --ignore-pattern \"*.tmp.js\"",
+    "format": "eslint --fix src/*.ts test/*.js --ignore-pattern \"*.tmp.js\"",
+    "pretest": "npm run lint && node scripts/ts-to-js.mjs src/boost-attrs.ts test/ext.tmp.js",
+    "test": "mocha-chrome test/index.html",
+    "posttest": "node --eval \"fs.unlinkSync('test/ext.tmp.js')\""
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=20.11.0"
+    }
   },
   "files": [
     "LICENSE",
@@ -31,7 +42,7 @@
     "dist/*"
   ],
   "eslintConfig": {
-    "extends": ["standard", "plugin:mocha/recommended"],
+    "extends": ["standard", "plugin:mocha/recommended", "plugin:@typescript-eslint/recommended"],
     "rules": {
       "mocha/consistent-spacing-between-blocks": 0,
       "mocha/no-setup-in-describe": 0,
@@ -49,6 +60,7 @@
       "no-redeclare": 0,
       "no-return-assign": 0,
       "no-unused-vars": 0,
+      "@typescript-eslint/no-unused-vars": 0,
       "no-useless-call": 0,
       "no-useless-escape": 0,
       "no-unused-expressions": 0,
