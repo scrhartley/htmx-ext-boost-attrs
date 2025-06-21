@@ -54,7 +54,7 @@ The fastest way to install `boost-attrs` is to load it via a CDN. Remember to al
 
 ```html
 <head>
-    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6" integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/scrhartley/htmx-ext-boost-attrs@0.0.0/dist/boost-attrs.min.js" integrity="sha384-nYmSuzDSFrs+dq2leJam05mhnpHIvHmRuFdZL5tIVZb+Cuv6jBE+Tzrae3Mbwkaq" crossorigin="anonymous"></script>
 </head>
 <body hx-boost="true" hx-ext="boost-attrs">

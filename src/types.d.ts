@@ -16,9 +16,8 @@ type BaseEvent<T extends string, D extends object = object> = {
   readonly detail: D extends { boosted: unknown } ? D : { boosted?: never }
 } & Omit<CustomEvent<D>, 'type'>
 
-type RequestConfig = { elt: Element } & HtmxRequestConfig
-type ConfigRequestEvent = BaseEvent<'htmx:configRequest', RequestConfig>
-type BeforeSwapEvent = BaseEvent<'htmx:beforeSwap', HtmxBeforeSwapDetails & { requestConfig: RequestConfig }>
+type ConfigRequestEvent = BaseEvent<'htmx:configRequest', HtmxRequestConfig>
+type BeforeSwapEvent = BaseEvent<'htmx:beforeSwap', HtmxBeforeSwapDetails>
 type UnknownEvent = BaseEvent<'???' /* a literal in order to get exhaustive inference */>
 type AllEvents = ConfigRequestEvent | BeforeSwapEvent | UnknownEvent
 
