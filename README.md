@@ -24,6 +24,16 @@ Without the extension:
 ...
 </body>
 ```
+Existing workaround:
+```js
+document.addEventListener('htmx:beforeSwap', function(evt) {
+  if (evt.detail.boosted) {
+    evt.detail.swapOverride = 'outerHTML transition:true' // for default: 'innerHTML'
+    evt.detail.selectOverride = '#main'                   // for default: 'unset'
+    evt.detail.target = document.querySelector('#main')   // for default: document.body
+  }
+})
+```
 
 
 ## Usage
