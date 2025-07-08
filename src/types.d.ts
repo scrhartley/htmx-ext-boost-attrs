@@ -13,7 +13,7 @@ export type ExtensionApi = {
 
 type BaseEvent<T extends string, D extends object = object> = {
   readonly type: T // Generify
-  readonly detail: D extends { boosted: unknown } ? D : { boosted?: never }
+  readonly detail: D extends { boosted: unknown } ? D : D & { boosted?: never }
 } & Omit<CustomEvent<D>, 'type'>
 
 type ConfigRequestEvent = BaseEvent<'htmx:configRequest', HtmxRequestConfig>
