@@ -6,7 +6,7 @@
   "type": "module",
   "bugs": "https://github.com/scrhartley/htmx-ext-boost-attrs/issues",
   "license": "0BSD",
-  "dependencies": {
+  "peerDependencies": {
     "htmx.org": "^2.0.6"
   },
   "devDependencies": {
