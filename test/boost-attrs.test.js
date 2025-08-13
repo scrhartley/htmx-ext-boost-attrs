@@ -1,4 +1,4 @@
-describe('optimistic-updates extension swaps', function() {
+describe('boost-attrs extension behavior', function() {
   beforeEach(function() {
     this.server = makeServer()
     clearWorkArea()
