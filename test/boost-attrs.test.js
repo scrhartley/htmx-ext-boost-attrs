@@ -10,7 +10,7 @@ describe('boost-attrs extension behavior', function() {
 
   it('a boost swap only applies when boosting', function() {
     this.server.respondWith('GET', '/test', '&amp;')
-    make('<div hx-ext="boost-attrs" hx-boost-swap="textContent">' +
+    make('<div hx-boost-swap="textContent">' +
          '  <a id="boosted"   href="/test" hx-boost="true" hx-target="this">Foo</a>' +
          '  <a id="unboosted" hx-get="/test">Bar</a>' +
          '</div>')
@@ -28,7 +28,7 @@ describe('boost-attrs extension behavior', function() {
 
   it('a boost select only applies when boosting', function() {
     this.server.respondWith('GET', '/test', '<div><span id="inner">Result</span></div>')
-    make('<div hx-ext="boost-attrs" hx-boost-select="#inner">' +
+    make('<div hx-boost-select="#inner">' +
          '  <a id="boosted"   href="/test" hx-boost="true" hx-target="this">Foo</a>' +
          '  <a id="unboosted" hx-get="/test">Bar</a>' +
          '</div>')
@@ -46,10 +46,8 @@ describe('boost-attrs extension behavior', function() {
 
   it('a boost target only applies when boosting', function() {
     this.server.respondWith('GET', '/test', 'Result')
-    // Have to specify a value of hx-target where hx-ext="boost-attrs" is active,
-    // since the default target for a boost is the body where it isn't active.
-    make('<div id="outer" hx-ext="boost-attrs" hx-boost-target="closest div">' +
-         '  <div id="d1"><a id="a1" href="/test" hx-boost="true" hx-target="#outer">Foo</a></div>' +
+    make('<div id="outer" hx-boost-target="closest div">' +
+         '  <div id="d1"><a id="a1" href="/test" hx-boost="true">Foo</a></div>' +
          '  <div id="d2"><a id="a2" hx-get="/test">Bar</a></div>' +
          '</div>')
 
@@ -67,7 +65,7 @@ describe('boost-attrs extension behavior', function() {
 
   it('a boost swap overrides hx-swap', function() {
     this.server.respondWith('GET', '/test', '&amp;')
-    make('<div hx-ext="boost-attrs" hx-boost="true" hx-boost-swap="textContent" hx-target="closest a">' +
+    make('<div hx-boost="true" hx-boost-swap="textContent" hx-target="closest a">' +
          '  <a id="a1" href="/test" hx-swap="innerHTML">Foo</a>' +
          '  <a id="a2" href="/test">Bar</a>' +
          '</div>')
@@ -83,7 +81,7 @@ describe('boost-attrs extension behavior', function() {
   it('a boost select overrides hx-select', function() {
     var response = '<div id="inner1"></div> <div id="inner2"></div>'
     this.server.respondWith('GET', '/test', response)
-    make('<div hx-ext="boost-attrs" hx-boost="true" hx-boost-select="#inner2" hx-target="closest a">' +
+    make('<div hx-boost="true" hx-boost-select="#inner2" hx-target="closest a">' +
          '  <a id="a1" href="/test" hx-select="#inner1">Foo</a>' +
          '  <a id="a2" href="/test">Bar</a>' +
          '</div>')
@@ -98,7 +96,7 @@ describe('boost-attrs extension behavior', function() {
 
   it('a boost target overrides hx-target', function() {
     this.server.respondWith('GET', '/test', '<div>Result</div>')
-    make('<div hx-ext="boost-attrs" hx-boost="true" hx-boost-target="#boostTarget" hx-target="closest a">' +
+    make('<div hx-boost="true" hx-boost-target="#boostTarget" hx-target="closest a">' +
          '  <a id="a1" href="/test" hx-target="#otherTarget">Foo</a>' +
          '  <a id="a2" href="/test">Bar</a>' +
          '  <div id="boostTarget"></div>' +
@@ -117,7 +115,7 @@ describe('boost-attrs extension behavior', function() {
 
   it('a boost target should accept "this" as a value', function() {
     this.server.respondWith('GET', '/test', '<div id="result"></div>')
-    make('<div hx-ext="boost-attrs" hx-boost="true" hx-target="this">' +
+    make('<div hx-boost="true" hx-target="this">' +
          '  <div id="boostTarget" hx-boost-target="this">' +
          '    <a id="a1" href="/test">Foo</a>' +
          '  </div>' +
@@ -134,7 +132,7 @@ describe('boost-attrs extension behavior', function() {
     var originalScroll = htmx.config.scrollIntoViewOnBoost
     try {
       var swapSpec = htmx._('getSwapSpecification') // internal function for swap spec
-      var a = make('<a href="/test" hx-target="this" hx-boost="true" hx-ext="boost-attrs">Foo</a>')
+      var a = make('<a href="/test" hx-target="this" hx-boost="true">Foo</a>')
 
       // I can't think of a good way to test which actually uses hx-boost-swap
       htmx.config.scrollIntoViewOnBoost = true
@@ -156,7 +154,7 @@ describe('boost-attrs extension behavior', function() {
     htmx.config.defaultSwapStyle = 'textContent' // show it's irrelevant
     try {
       var swapSpec = htmx._('getSwapSpecification') // internal function for swap spec
-      var a = make('<a href="/test" hx-target="this" hx-boost="true" hx-ext="boost-attrs">Foo</a>')
+      var a = make('<a href="/test" hx-target="this" hx-boost="true">Foo</a>')
 
       // I can't think of a good way to test which actually uses hx-boost-swap
       swapSpec(a).swapStyle.should.equal('innerHTML')
@@ -176,7 +174,7 @@ describe('boost-attrs extension behavior', function() {
     })
     try {
       this.server.respondWith('GET', '/test', 'Result')
-      make('<div hx-ext="boost-attrs" hx-boost="true">' +
+      make('<div hx-boost="true">' +
            '  <a id="a1" href="/test" hx-target="this" hx-boost-target="#real"></a>' +
            '  <a id="a2" href="/test" hx-target="this" hx-boost-target="#fake"></a>' +
            '  <div id="real"></div>' +
@@ -208,7 +206,7 @@ describe('boost-attrs extension behavior', function() {
     })
     try {
       this.server.respondWith('GET', '/test', 'Result')
-      make('<div hx-ext="boost-attrs">' +
+      make('<div>' +
            '  <a id="boosted"   href="/test" hx-boost="true" hx-target="this">Foo</a>' +
            '  <a id="unboosted" hx-get="/test">Bar</a>' +
            '</div>')
@@ -255,7 +253,7 @@ describe('boost-attrs extension behavior', function() {
         '  <div id="select2">Result</div>' +
         '  <div id="select3">Result</div>' +
         '</div>')
-      make('<div hx-ext="boost-attrs" hx-boost="true">' +
+      make('<div hx-boost="true">' +
            '  <a id="a1" href="/test" hx-target="#target1" hx-select="#select1" hx-swap="beforebegin"></a>' +
            '  <div>' +
            '    <div id="target1"></div>' +
@@ -295,7 +293,7 @@ describe('boost-attrs extension behavior', function() {
         var header = useResponseHeader ? { 'HX-Reswap': 'innerHTML ignoreTitle:true' } : {}
         xhr.respond(200, header, '<div>foo</div>')
       })
-      make('<div hx-ext="boost-attrs" hx-boost="true" hx-target="closest a">' +
+      make('<div hx-boost="true" hx-target="closest a">' +
            '  <a id="a1" href="/test" hx-boost-swap="beforeend"></a>')
       var a = byId('a1')
 
@@ -323,7 +321,7 @@ describe('boost-attrs extension behavior', function() {
       var header = useResponseHeader ? { 'HX-Reselect': '#inner' } : {}
       xhr.respond(200, header, '<section><div id="outer"><div id="inner"></div></div></section>')
     })
-    make('<div hx-ext="boost-attrs" hx-boost="true" hx-target="closest a">' +
+    make('<div hx-boost="true" hx-target="closest a">' +
          '  <a id="a1" href="/test" hx-boost-select="#outer"></a>')
     var a = byId('a1')
 
@@ -344,7 +342,7 @@ describe('boost-attrs extension behavior', function() {
       var header = useResponseHeader ? { 'HX-Retarget': '#target2' } : {}
       xhr.respond(200, header, '<div id="response">foo</div>')
     })
-    make('<div hx-ext="boost-attrs" hx-boost="true" hx-target="this">' +
+    make('<div hx-boost="true" hx-target="this">' +
          '  <a id="a1" href="/test" hx-boost-target="#target1"></a>' +
          '  <div>' +
          '    <div id="target1"></div>' +
