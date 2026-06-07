@@ -1,8 +1,8 @@
-# htmx Boost Attributes Extension
+# htmx 2 Boost Attributes Extension
 
 ## Description
 
-The `boost-attrs` extension allows using boost functionality without the problems related to inheritance that come with using other htmx attributes alongside [`hx-boost`](https://htmx.org/attributes/hx-boost/). This extension adds boost-specific replacements for `hx-swap`, `hx-target` and `hx-select`.
+The `boost-attrs` extension for htmx 2 allows using boost functionality without the problems related to inheritance that come with using other htmx attributes alongside [`hx-boost`](https://htmx.org/attributes/hx-boost/). This extension adds boost-specific replacements for `hx-swap`, `hx-target` and `hx-select`.
 
 ### The problem being solved
 
