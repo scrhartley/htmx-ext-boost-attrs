@@ -7,7 +7,7 @@
   "bugs": "https://github.com/scrhartley/htmx-ext-boost-attrs/issues",
   "license": "0BSD",
   "peerDependencies": {
-    "htmx.org": "^2.0.6"
+    "htmx.org": "^2.0.10"
   },
   "devDependencies": {
     "chai": "^4.5.0",
