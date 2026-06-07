@@ -65,7 +65,7 @@ The fastest way to install `boost-attrs` is to load it via a CDN. Remember to al
 ```html
 <head>
     <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10" integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/scrhartley/htmx-ext-boost-attrs@0.0.0/dist/boost-attrs.min.js" integrity="sha384-nYmSuzDSFrs+dq2leJam05mhnpHIvHmRuFdZL5tIVZb+Cuv6jBE+Tzrae3Mbwkaq" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/scrhartley/htmx-ext-boost-attrs@0.0.1/dist/boost-attrs.min.js" integrity="sha384-WpP43L0tEPsUHSFWUjwetq2K9CB3OBZicJGGvd1oCk7pIAEVJo2nstXUgYAzAnNK" crossorigin="anonymous"></script>
 </head>
 <body hx-boost="true" hx-ext="boost-attrs">
 ...
@@ -76,7 +76,7 @@ https://cdn.jsdelivr.net/gh/scrhartley/htmx-ext-boost-attrs/dist/boost-attrs.js
 
 For npm-style build systems, you can install `boost-attrs` via [npm](https://www.npmjs.com/):
 ```shell
-npm install "scrhartley/htmx-ext-boost-attrs#semver:^0.0.0"
+npm install "scrhartley/htmx-ext-boost-attrs#semver:^0.0.1"
 ```
 If you are using a bundler to manage your javascript:
 * Install `htmx.org` and `scrhartley/htmx-ext-boost-attrs` via npm

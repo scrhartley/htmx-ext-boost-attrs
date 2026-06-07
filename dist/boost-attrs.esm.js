@@ -11,7 +11,7 @@ import htmx from 'htmx.org'
       if (name === 'htmx:configRequest') {
         const elt = evt.detail.elt
         const targetOverride = api.getClosestAttributeValue(elt, 'hx-boost-target')
-        if (targetOverride && !resolveTarget(elt, targetOverride)) return !!triggerTargetError(elt, targetOverride) && false
+        if (targetOverride && !resolveTarget(elt, targetOverride)) return (triggerTargetError(elt, targetOverride), false)
       } else if (name === 'htmx:beforeSwap') {
         const elt = evt.detail.requestConfig.elt
         const targetOverride = api.getClosestAttributeValue(elt, 'hx-boost-target')
@@ -21,7 +21,7 @@ import htmx from 'htmx.org'
 
         if (targetOverride && !/HX-Retarget:/i.test(headers)) {
           const target = resolveTarget(elt, targetOverride)
-          if (!target) return !!triggerTargetError(elt, targetOverride) && false
+          if (!target) return (triggerTargetError(elt, targetOverride), false)
           evt.detail.target = target
         }
         if (swapOverride && !/HX-Reswap:/i.test(headers)) evt.detail.swapOverride = swapOverride
